@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 const PLength = ({pLen}) => {
   const [longInput, setLongInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [error, setError] = useState('');
 
   const generatePassword = async () => {
     setIsLoading(true);
+    setError('');
     try {
       const response = await fetch(`http://localhost:5000/generate-sentence/${pLen}`);
       if (!response.ok) {
@@ -16,7 +17,8 @@ const PLength = ({pLen}) => {
       setLongInput(data.sentence);
     } catch (error) {
       console.error('Error:', error);
-      setLongInput('Error generating password. Please try again.');
+      setError('Error generating password. Please try again.');
+      setLongInput('');
     } finally {
       setIsLoading(false);
     }
@@ -44,7 +46,7 @@ const PLength = ({pLen}) => {
             type="text"
             value={longInput}
             onChange={(e) => setLongInput(e.target.value)}
-            placeholder="Your generated PASSPHRASE will appear here."
+            placeholder={error || "Your generated PASSPHRASE will appear here."}
             className="flex-1 px-2 py-1 bg-gray-600 text-white focus:outline-none"
             readOnly
           />
