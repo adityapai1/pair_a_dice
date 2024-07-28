@@ -1,4 +1,24 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Custom CSS to override React-Toastify styles
+const customToastStyle = `
+  .Toastify__toast-container {
+    width: 250px;
+    
+  }
+  .Toastify__toast {
+    background-color: #2d3748;
+    color: white;
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 4px;
+  }
+  .Toastify__progress-bar {
+    background: #3b82f6;
+  }
+`;
 
 const PLength = ({pLen}) => {
   const [longInput, setLongInput] = useState('');
@@ -26,12 +46,36 @@ const PLength = ({pLen}) => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(longInput)
-      .then(() => alert('Password copied to clipboard!'))
+      .then(() => {
+        toast('Copied to clipboard!', {
+          position: "top-right",
+          autoClose: 5000, // Increased to 5 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
       .catch(err => console.error('Failed to copy: ', err));
   };
 
   return (
     <div className="bg-gray-800 mt-12 p-4 w-full max-w-2xl rounded-lg">
+      <style>{customToastStyle}</style>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition:Bounce
+      />
       <div className="bg-gray-700 p-4 rounded-lg text-white">
         <h2 className="text-lg font-bold mb-2">Generate Password:</h2>
         <div className="flex mb-2">
@@ -51,7 +95,7 @@ const PLength = ({pLen}) => {
             readOnly
           />
           <button 
-            className="bg-gray-600 px-2 py-1 rounded-r-md hover:bg-gray-500 transition duration-300"
+            className="bg-gray-600 px-2 py-1 rounded-r-md hover:bg-gray-500 transition duration-100"
             onClick={copyToClipboard}
           >
             📋
