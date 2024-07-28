@@ -1,5 +1,6 @@
 import React from 'react';
-import SemiCircleProgressBar from "react-progressbar-semicircle";
+import Lottie from 'lottie-react';
+import tarazoo from '../assets/tarazoo.json'
 
 const PStrong = ({ passwordLength, setPasswordLength, passwordStrength }) => {
   return (
@@ -25,22 +26,16 @@ const PStrong = ({ passwordLength, setPasswordLength, passwordStrength }) => {
           </div>
         </div>
       </div>
-
+      
       <div className="w-full max-w-md mt-4 md:mt-0">
         <h3 className="text-md font-semibold mb-2 text-center">Password Strength</h3>
         <div className="bg-gray-700 p-4 h-32 rounded-lg shadow-md flex items-center justify-center">
-          <SemiCircleProgressBar
-            percentage={passwordStrength}
-            showPercentValue
-            stroke="#10b981" // Green color
-            strokeWidth={10}
-            background="#374151" // Gray background
-            diameter={120}
+          <Lottie
+            animationData={tarazoo}
+            loop={true}
+            autoplay={true}
+            style={{ width: '100%', height: '100%' }}
           />
-        </div>
-        <div className="flex justify-between mt-2 text-gray-300">
-          <span>POOR</span>
-          <span>GOOD</span>
         </div>
       </div>
     </div>
@@ -48,5 +43,3 @@ const PStrong = ({ passwordLength, setPasswordLength, passwordStrength }) => {
 };
 
 export default PStrong;
-
-

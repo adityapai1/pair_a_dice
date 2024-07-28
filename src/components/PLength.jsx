@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-const PLength = () => {
+const PLength = ({pLen}) => {
   const [longInput, setLongInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
 
   const generatePassword = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/generate-sentence/5');
+      const response = await fetch(`http://localhost:5000/generate-sentence/${pLen}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

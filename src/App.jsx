@@ -16,7 +16,7 @@ function App() {
       
       {/* <PLength/> */}
 
-      <PLength longInput={longInput} setLongInput={setLongInput} />
+      <PLength longInput={longInput} setLongInput={setLongInput} pLen = {passwordLength} />
 
     
       
