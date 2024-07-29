@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Custom CSS to override React-Toastify styles
+
 const customToastStyle = `
   .Toastify__toast-container {
     width: 250px;
@@ -19,27 +19,12 @@ const customToastStyle = `
   }
 `;
 
-const PLength = ({ pLen, isGeneratePressed, setGeneratePressed, passphraseGenerated, setPassphraseGenerated, setEntropy, setTimeToCrack }) => {
+const PLength = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy, setStrength }) => {
   const [longInput, setLongInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const calculateTimeToCrack = (entropyBits, attemptsPerSecond = 1_000_000_000) => {
-    const SECONDS_IN_A_YEAR = 31_536_000;
-    const combinations = 2 ** entropyBits;
-    const time_seconds = combinations / attemptsPerSecond;
-    const time_years = time_seconds / SECONDS_IN_A_YEAR;
 
-    if (time_years >= 1_000_000_000) {
-      return `${(time_years / 1_000_000_000).toFixed(2)} billion years`;
-    } else if (time_years >= 1_000_000) {
-      return `${(time_years / 1_000_000).toFixed(2)} million years`;
-    } else if (time_years >= 1_000) {
-      return `${(time_years / 1_000).toFixed(2)} thousand years`;
-    } else {
-      return `${time_years.toFixed(2)} years`;
-    }
-  };
 
   const generatePassword = async () => {
     setGeneratePressed(true);  // Start looping
@@ -53,7 +38,7 @@ const PLength = ({ pLen, isGeneratePressed, setGeneratePressed, passphraseGenera
       const data = await response.json();
       setEntropy(data.entropy);
       setLongInput(data.sentence);
-      setTimeToCrack(calculateTimeToCrack(data.entropy));
+      setStrength(data.strength);
 
       setPassphraseGenerated(true);
     } catch (error) {
@@ -71,7 +56,7 @@ const PLength = ({ pLen, isGeneratePressed, setGeneratePressed, passphraseGenera
       .then(() => {
         toast('Copied to clipboard!', {
           position: "top-right",
-          autoClose: 5000, // Increased to 5 seconds
+          autoClose: 2500, // Increased to 5 seconds
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -121,6 +106,12 @@ const PLength = ({ pLen, isGeneratePressed, setGeneratePressed, passphraseGenera
           >
             📋
           </button>
+
+          <button onClick={() => setShowModal(true)} className="icon-button">
+            ℹ️
+          </button>
+
+          
         </div>
       </div>
     </div>
@@ -128,5 +119,4 @@ const PLength = ({ pLen, isGeneratePressed, setGeneratePressed, passphraseGenera
 };
 
 export default PLength;
-
 
