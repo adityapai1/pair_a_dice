@@ -20,12 +20,13 @@ const customToastStyle = `
   }
 `;
 
-const PLength = ({pLen}) => {
+const PLength = ({pLen, isGeneratePressed, setGeneratePressed, passphraseGenerated, setPassphraseGenerated} ) => {
   const [longInput, setLongInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
+  
   const generatePassword = async () => {
+    setGeneratePressed(true);  // Start looping
     setIsLoading(true);
     setError('');
     try {
@@ -35,12 +36,14 @@ const PLength = ({pLen}) => {
       }
       const data = await response.json();
       setLongInput(data.sentence);
+      setPassphraseGenerated(true);
     } catch (error) {
       console.error('Error:', error);
       setError('Error generating password. Please try again.');
       setLongInput('');
     } finally {
       setIsLoading(false);
+      setGeneratePressed(false);  // Stop looping after generation is complete
     }
   };
 
@@ -107,3 +110,4 @@ const PLength = ({pLen}) => {
 };
 
 export default PLength;
+
