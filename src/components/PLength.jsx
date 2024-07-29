@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const customToastStyle = `
   .Toastify__toast-container {
     width: 250px;
-    
   }
   .Toastify__toast {
     background-color: #2d3748;
@@ -20,11 +19,28 @@ const customToastStyle = `
   }
 `;
 
-const PLength = ({pLen, isGeneratePressed, setGeneratePressed, passphraseGenerated, setPassphraseGenerated} ) => {
+const PLength = ({ pLen, isGeneratePressed, setGeneratePressed, passphraseGenerated, setPassphraseGenerated, setEntropy, setTimeToCrack }) => {
   const [longInput, setLongInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
+  const calculateTimeToCrack = (entropyBits, attemptsPerSecond = 1_000_000_000) => {
+    const SECONDS_IN_A_YEAR = 31_536_000;
+    const combinations = 2 ** entropyBits;
+    const time_seconds = combinations / attemptsPerSecond;
+    const time_years = time_seconds / SECONDS_IN_A_YEAR;
+
+    if (time_years >= 1_000_000_000) {
+      return `${(time_years / 1_000_000_000).toFixed(2)} billion years`;
+    } else if (time_years >= 1_000_000) {
+      return `${(time_years / 1_000_000).toFixed(2)} million years`;
+    } else if (time_years >= 1_000) {
+      return `${(time_years / 1_000).toFixed(2)} thousand years`;
+    } else {
+      return `${time_years.toFixed(2)} years`;
+    }
+  };
+
   const generatePassword = async () => {
     setGeneratePressed(true);  // Start looping
     setIsLoading(true);
@@ -35,7 +51,10 @@ const PLength = ({pLen, isGeneratePressed, setGeneratePressed, passphraseGenerat
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      setEntropy(data.entropy);
       setLongInput(data.sentence);
+      setTimeToCrack(calculateTimeToCrack(data.entropy));
+
       setPassphraseGenerated(true);
     } catch (error) {
       console.error('Error:', error);
@@ -77,7 +96,6 @@ const PLength = ({pLen, isGeneratePressed, setGeneratePressed, passphraseGenerat
         draggable
         pauseOnHover
         theme="dark"
-        transition:Bounce
       />
       <div className="bg-gray-700 p-4 rounded-lg text-white">
         <h2 className="text-lg font-bold mb-2">Generate Password:</h2>
@@ -110,4 +128,5 @@ const PLength = ({pLen, isGeneratePressed, setGeneratePressed, passphraseGenerat
 };
 
 export default PLength;
+
 
