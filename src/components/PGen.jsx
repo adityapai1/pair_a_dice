@@ -47,7 +47,9 @@ const PLength = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy,
       setLongInput('');
     } finally {
       setIsLoading(false);
-      setGeneratePressed(false);  // Stop looping after generation is complete
+      setGeneratePressed(false);  
+
+      
     }
   };
 
@@ -107,9 +109,7 @@ const PLength = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy,
             📋
           </button>
 
-          <button onClick={() => setShowModal(true)} className="icon-button">
-            ℹ️
-          </button>
+          
 
           
         </div>

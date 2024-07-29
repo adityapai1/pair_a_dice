@@ -79,7 +79,7 @@ const strengthColors = {
   'Very Weak': 'bg-red-700',     // Dark Red
   'Weak': 'bg-orange-600',       // Dark Orange
   'Strong': 'bg-green-400',      // Light Green
-  'Very Strong': 'bg-green-800'  // Dark Green
+  'Very Strong': 'bg-green'  // Dark Green
 };
 
 const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy, strength }) => {

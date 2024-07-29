@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './components/header';
-import PLength from './components/PLength';
+import PLength from './components/PGen';
 import PStrong from './components/PStrong';
 
 function App() {
