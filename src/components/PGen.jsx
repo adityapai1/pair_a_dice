@@ -30,7 +30,7 @@ const PGen = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy, se
     setIsLoading(true);
     setError('');
     try {
-      const response = await fetch(`http://localhost:5000/generate-sentence/${pLen}`);
+      const response = await fetch(`https://pair-a-dice-backend.vercel.app/generate-sentence/${pLen}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
