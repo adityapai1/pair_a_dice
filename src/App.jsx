@@ -16,10 +16,13 @@ function App() {
   
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center text-gray-300">
+    <div className="min-h-screen bg-gray-900 flex flex-col  items-center text-gray-300">
       <Header />
+      
+      
 
-      <PLength
+
+      <PLength 
         pLen={passwordLength}
         isGeneratePressed={isGeneratePressed}
         setGeneratePressed={setGeneratePressed}
@@ -27,7 +30,7 @@ function App() {
         setPassphraseGenerated={setPassphraseGenerated}
         setEntropy={setEntropy}
         setStrength={setStrength}
-      />
+        />
 
       <PStrong
         passwordLength={passwordLength}
@@ -37,10 +40,13 @@ function App() {
         passphraseGenerated={passphraseGenerated}
         entropy={entropy}
         strength={strength}
-
+        
         setGeneratePressed={setGeneratePressed}
-      />
+        />
     </div>
+
+        
+    
   );
 }
 

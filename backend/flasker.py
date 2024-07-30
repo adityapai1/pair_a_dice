@@ -4,10 +4,16 @@ import pymongo
 from secrets import randbelow
 import math
 import string
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
+MONGO_URI = os.getenv('MONGO_URI')
 def get_password_strength(entropy):
     if entropy <= 35:
         return "Very Weak"
@@ -25,7 +31,7 @@ def generate_word_key():
     return int(''.join(str(generate_secure_random_number(1, 6)) for _ in range(5)))
 
 def fetch_word_from_mongodb(key):
-    client = pymongo.MongoClient("mongodb+srv://adotus:goodboy@cluster0.lcdexx1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    client = pymongo.MongoClient(MONGO_URI)
     db = client["Basedb"]
     collection = db["word_list"]
     

@@ -33,7 +33,7 @@ const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy
   const strengthClass = showEntropy ? (strengthColors[strength] || 'bg-gray-600') : 'bg-gray-700';
 
   return (
-    <div className="bg-gray-800 m-6 p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center w-full max-w-2xl">
+    <div className="bg-gray-800 m-6 p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center w-full max-w-2xl" >
       <div className="w-full max-w-md mb-8 md:mb-0 md:mr-4">
         <h3 className="text-md font-semibold mb-2 text-center">Word Count</h3>
         <div className="bg-gray-700 p-8 h-32 rounded-lg relative shadow-md">
