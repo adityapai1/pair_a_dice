@@ -10,13 +10,13 @@ CORS(app)
 
 def get_password_strength(entropy):
     if entropy <= 35:
-        return "Very weak"
+        return "Very Weak"
     elif entropy <= 59:
         return "Weak"
     elif entropy <= 119:
         return "Strong"
     else:
-        return "Very strong"
+        return "Very Strong"
 
 def generate_secure_random_number(start, end):
     return start + randbelow(end - start + 1)

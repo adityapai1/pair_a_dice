@@ -2,6 +2,13 @@
 // import Lottie from 'lottie-react';
 // import tarazoo from '../assets/tarazoo.json';
 
+// const strengthColors = {
+//   'Very Weak': 'bg-red-400',     // Dark Red
+//   'Weak': 'bg-orange-300',       // Dark Orange
+//   'Strong': 'bg-green-500',      // Light Green
+//   'Very Strong': 'bg-sky-500'  // Dark Green
+// };
+
 // const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy, strength }) => {
 //   const lottieRef = useRef();
 //   const [showEntropy, setShowEntropy] = useState(false);
@@ -22,10 +29,17 @@
 //     }
 //   }, [isGeneratePressed, entropy]);
 
+//   // Determine the background color class based on strength
+//   const strengthClass = strengthColors[strength] || 'bg-gray-600'; // Fallback color
+
+//   // Debugging log
+//   console.log("Current Strength:", strength);
+//   console.log("Applied Class:", strengthClass);
+
 //   return (
 //     <div className="bg-gray-800 m-6 p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center w-full max-w-2xl">
 //       <div className="w-full max-w-md mb-8 md:mb-0 md:mr-4">
-//         <h3 className="text-md font-semibold mb-2 text-center">Password Length</h3>
+//         <h3 className="text-md font-semibold mb-2 text-center">Word Count</h3>
 //         <div className="bg-gray-700 p-8 h-32 rounded-lg relative shadow-md">
 //           <input
 //             type="range"
@@ -33,7 +47,7 @@
 //             max="6"
 //             step="1"
 //             value={passwordLength}
-//             onChange={(e) => setPasswordLength(e.target.value)}
+//             onChange={(e) => setPasswordLength(Number(e.target.value))}
 //             className="w-full"
 //           />
 //           <div className="flex justify-between mt-2 text-gray-300">
@@ -49,7 +63,9 @@
 //       {/* Password Strength section */}
 //       <div className="w-full max-w-md mt-4 md:mt-0">
 //         <h3 className="text-md font-semibold mb-2 text-center">Password Strength</h3>
-//         <div className="bg-gray-700 p-4 h-32 rounded-lg shadow-md flex items-center justify-center relative">
+//         <div 
+//           className={`bg-gray-700 p-4 h-32 rounded-lg shadow-md flex items-center justify-center relative ${strengthClass}`}
+//         >
 //           <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500 ${showEntropy ? 'opacity-100' : 'opacity-0'}`}>
 //             <span className="text-2xl font-bold text-white">{strength}</span>
 //             <span className="text-sm font-light text-gray-300 mt-1">{entropy} Bits</span>
@@ -70,16 +86,15 @@
 // };
 
 // export default PStrong;
-
 import React, { useRef, useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import tarazoo from '../assets/tarazoo.json';
 
 const strengthColors = {
-  'Very Weak': 'bg-red-700',     // Dark Red
-  'Weak': 'bg-orange-600',       // Dark Orange
-  'Strong': 'bg-green-400',      // Light Green
-  'Very Strong': 'bg-green'  // Dark Green
+  'Very Weak': 'bg-red-400',     // Dark Red
+  'Weak': 'bg-orange-300',       // Dark Orange
+  'Strong': 'bg-green-500',      // Light Green
+  'Very Strong': 'bg-sky-500'    // Dark Green
 };
 
 const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy, strength }) => {
@@ -102,10 +117,13 @@ const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy
     }
   }, [isGeneratePressed, entropy]);
 
+  // Determine the background color class based on strength and showEntropy
+  const strengthClass = showEntropy ? (strengthColors[strength] || 'bg-gray-600') : 'bg-gray-700';
+
   return (
     <div className="bg-gray-800 m-6 p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center w-full max-w-2xl">
       <div className="w-full max-w-md mb-8 md:mb-0 md:mr-4">
-        <h3 className="text-md font-semibold mb-2 text-center">Password Length</h3>
+        <h3 className="text-md font-semibold mb-2 text-center">Word Count</h3>
         <div className="bg-gray-700 p-8 h-32 rounded-lg relative shadow-md">
           <input
             type="range"
@@ -113,7 +131,7 @@ const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy
             max="6"
             step="1"
             value={passwordLength}
-            onChange={(e) => setPasswordLength(e.target.value)}
+            onChange={(e) => setPasswordLength(Number(e.target.value))}
             className="w-full"
           />
           <div className="flex justify-between mt-2 text-gray-300">
@@ -130,7 +148,7 @@ const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy
       <div className="w-full max-w-md mt-4 md:mt-0">
         <h3 className="text-md font-semibold mb-2 text-center">Password Strength</h3>
         <div 
-          className={`bg-gray-700 p-4 h-32 rounded-lg shadow-md flex items-center justify-center relative ${strengthColors[strength] || 'bg-gray-600'}`}
+          className={`p-4 h-32 rounded-lg shadow-md flex items-center justify-center relative transition-colors duration-500 ${strengthClass}`}
         >
           <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500 ${showEntropy ? 'opacity-100' : 'opacity-0'}`}>
             <span className="text-2xl font-bold text-white">{strength}</span>
