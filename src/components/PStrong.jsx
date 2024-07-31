@@ -59,13 +59,13 @@ const PStrong = ({ passwordLength, setPasswordLength, isGeneratePressed, entropy
 
       {/* Password Strength section */}
       <div className="w-full max-w-md mt-4 md:mt-0">
-        <h3 className="text-md font-semibold mb-2 text-center">Password Strength</h3>
+        <h3 className="text-md font-semibold mb-2 text-center">Passphrase Strength</h3>
         <div 
           className={`p-4 h-32 rounded-lg shadow-md flex items-center justify-center relative transition-colors duration-500 ${strengthClass}`}
         >
           <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500 ${showEntropy ? 'opacity-100' : 'opacity-0'}`}>
             <span className="text-2xl font-bold text-white">{strength}</span>
-            <span className="text-sm font-light text-gray-300 mt-1">{entropy} Bits</span>
+            <span className="text-sm font-bold text-gray-300 mt-1">Entropy {entropy} Bits</span>
           </div>
           <div className={`absolute inset-0 transition-opacity duration-500 ${showEntropy ? 'opacity-0' : 'opacity-100'}`}>
             <Lottie

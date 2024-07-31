@@ -81,7 +81,7 @@ const PGen = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy, se
         theme="dark"
       />
       <div className="bg-gray-700 p-4 rounded-lg text-white">
-        <h2 className="text-lg font-bold mb-2">Generate Password:</h2>
+        <h2 className="text-lg font-bold mb-2">Generate Passphrase:</h2>
         <div className="flex mb-2">
           <button 
             className={`bg-blue-600 text-white px-3 py-1 rounded-l-md hover:bg-blue-700 transition duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -94,7 +94,7 @@ const PGen = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy, se
             type="text"
             value={longInput}
             onChange={(e) => setLongInput(e.target.value)}
-            placeholder={error || "Your generated PASSPHRASE will appear here."}
+            placeholder={error || "Passphrase will appear here."}
             className="flex-1 px-2 py-1 bg-gray-600 text-white focus:outline-none"
             readOnly
           />
@@ -108,13 +108,13 @@ const PGen = ({ pLen, setGeneratePressed, setPassphraseGenerated, setEntropy, se
             className="bg-gray-600 text-white px-3 py-1 rounded-r-md hover:bg-gray-500 transition duration-300"
             onClick={() => setModalShow(true)}
           >
-            ℹ
+            ℹ️
           </button>
         </div>
       </div>
       <ModalBox show={modalShow} onHide={() => setModalShow(false)}>
-        <p>This is a secure password generator. It creates a strong passphrase based on your specified length.</p>
-        <p>The generated passphrase is designed to be both secure and memorable.</p>
+        <p className='text-justify'>Pair-a-Dice turns complex security into simple fun! Instead of confusing numbers and symbols, you create a memorable password using random words. It's like building a unique puzzle only you can solve. This clever method tackles the age-old problem of passwords that are either too weak to protect you or too tricky to remember.</p>
+        
       </ModalBox>
       
     </div>

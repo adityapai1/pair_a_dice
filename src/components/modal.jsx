@@ -15,7 +15,7 @@ function ModalBox({ show, onHide, children }) {
         `}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Information</h2>
+          <h2 className="text-2xl font-bold">Why Pair-a-Dice? </h2>
           <button
             onClick={onHide}
             className="text-gray-400 hover:text-white focus:outline-none transition duration-3000 ease-in-out"
