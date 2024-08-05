@@ -20,7 +20,7 @@ It generates easy-to-remember yet highly secure passphrases by simulating virtua
 - **Backend**: WSGI server
 - **Database**: MongoDB
 
-## 🔒 Degree
+## 🔒 Important Feature
 
 Pair-a-Dice uses Python's `secrets` library to generate random numbers that are cryptographically strong, ensuring a high level of entropy and security for your passphrases.
 
